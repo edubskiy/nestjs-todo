@@ -30,4 +30,20 @@ export class TasksService {
 
     return task;
   }
+
+  deleteTask(id: string): Task {
+    let deletedTask: Task;
+    this.tasks = this.tasks.filter(task => {
+      if (task.id === id) {
+        deletedTask = task;
+        return false;
+      }
+      return true;
+    });
+
+    console.log('final tasks');
+    console.log(this.tasks);
+
+    return deletedTask;
+  }
 }
