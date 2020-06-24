@@ -41,9 +41,13 @@ export class TasksService {
       return true;
     });
 
-    console.log('final tasks');
-    console.log(this.tasks);
-
     return deletedTask;
+  }
+
+  updateTaskStatus(id: string, newStatus: TaskStatus) {
+    const task = this.getTaskById(id);
+    task.status = newStatus;
+
+    return task;
   }
 }
