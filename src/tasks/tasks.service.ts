@@ -52,9 +52,13 @@ export class TasksService {
       throw new NotFoundException(`Task with ID ${id} not found`);
     }
   }
-  // updateTaskStatus(id: string, newStatus: TaskStatus) {
-  //   const task = this.getTaskById(id);
-  //   task.status = newStatus;
-  //   return task;
-  // }
+
+  async updateTaskStatus(id: number, newStatus: TaskStatus): Promise<Task> {
+    const task = await this.getTaskById(id);
+    task.status = newStatus;
+
+    await task.save();
+
+    return task;
+  }
 }
