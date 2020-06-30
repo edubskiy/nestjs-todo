@@ -42,10 +42,14 @@ export class TasksService {
     }
   }
 
-  // async updateTaskStatus(id: number, newStatus: TaskStatus): Promise<Task> {
-  //   const task = await this.getTaskById(id);
-  //   task.status = newStatus;
-  //   await task.save();
-  //   return task;
-  // }
+  async updateTaskStatus(
+    id: number,
+    newStatus: TaskStatus,
+    user: User,
+  ): Promise<Task> {
+    const task = await this.getTaskById(id, user);
+    task.status = newStatus;
+    await task.save();
+    return task;
+  }
 }
