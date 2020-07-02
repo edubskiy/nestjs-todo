@@ -1,3 +1,4 @@
+import { Task } from './../tasks/task.entity';
 import * as bcrypt from 'bcryptjs';
 import {
   BaseEntity,
@@ -7,7 +8,6 @@ import {
   Unique,
   OneToMany,
 } from 'typeorm';
-import { Task } from 'src/tasks/task.entity';
 
 @Entity()
 @Unique(['username'])
