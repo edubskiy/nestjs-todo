@@ -31,9 +31,3 @@ describe('Friends list', () => {
     expect(friendsList.announceFriendship).toHaveBeenCalled();
   });
 });
-
-// describe('my test', () => {
-//   it('returns true', () => {
-//     expect(true).toEqual(true)
-//   })
-// })
