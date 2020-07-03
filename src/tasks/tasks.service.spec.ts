@@ -7,6 +7,7 @@ import { NotFoundException } from '@nestjs/common';
 
 const mockTaskRepository = () => ({
   getTasks: jest.fn(),
+  createTask: jest.fn(),
   findOne: jest.fn(),
 });
 
@@ -64,6 +65,24 @@ describe('TasksService', () => {
       taskRepository.findOne.mockResolvedValue(null);
       expect(tasksService.getTaskById(1, mockUser)).rejects.toThrow(
         NotFoundException,
+      );
+    });
+  });
+
+  describe('createTask', () => {
+    it('successfully creates task', async () => {
+      const mockTaskDTO = { title: 'Test task', description: 'Test desc' };
+      const mockTask = { ...mockTaskDTO, status: TaskStatus.OPEN };
+      taskRepository.createTask.mockResolvedValue(mockTask);
+
+      expect(taskRepository.createTask).not.toHaveBeenCalled();
+
+      const result = await tasksService.createTask(mockTaskDTO, mockUser);
+
+      expect(result).toEqual(mockTask);
+      expect(taskRepository.createTask).toHaveBeenCalledWith(
+        mockTaskDTO,
+        mockUser,
       );
     });
   });
